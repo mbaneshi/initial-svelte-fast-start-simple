@@ -33,7 +33,8 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
    *   **Update `src/routes/+layout.svelte`:**
       *   Add a button in the navigation bar to the `/code_explainer` route.
       *   You can also add a basic header and footer for the app
-      ```svelte
+       
+```svelte
         <script>
           import { page } from '$app/stores';
           let $page = $derived($page);
@@ -80,7 +81,6 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
 
             }
          </style>
-
       ```
 
 **2. Code Input Page:**
@@ -91,7 +91,8 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
 
    *   **Database Model:**
         *   Create a new model in `app/modules/code/models.py` ( or update if already exist)
-            ```python
+
+      ```python
              # app/modules/code/models.py
               from sqlalchemy import Column, Integer, Text, DateTime
               from sqlalchemy.sql import func
@@ -106,7 +107,7 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
                   explanation = Column(Text, nullable=True) #Explanation will be none for the start
                   created_at = Column(DateTime(timezone=True), server_default=func.now())
                   updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-            ```
+         ```
         *   Make sure to include this in the alembic as a revision and update database
 
     *   **Services Layer**:
