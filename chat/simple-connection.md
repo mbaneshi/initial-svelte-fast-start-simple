@@ -91,8 +91,7 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
 
    *   **Database Model:**
         *   Create a new model in `app/modules/code/models.py` ( or update if already exist)
-
-      ```python
+```python
              # app/modules/code/models.py
               from sqlalchemy import Column, Integer, Text, DateTime
               from sqlalchemy.sql import func
@@ -107,13 +106,13 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
                   explanation = Column(Text, nullable=True) #Explanation will be none for the start
                   created_at = Column(DateTime(timezone=True), server_default=func.now())
                   updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-         ```
+```
         *   Make sure to include this in the alembic as a revision and update database
 
     *   **Services Layer**:
         *   Create a new services file in `app/modules/code/services.py`
 
-          ```python
+```python
           # app/modules/code/services.py
           from sqlalchemy.orm import Session
           from app.modules.code import models
@@ -135,10 +134,10 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
                   db.refresh(db_code)
                   return db_code
               return None
-          ```
+```
     *   **Backend Implementation:**
         *   Update the `api/v1/code.py` endpoint:
-            ```python
+```python
             # api/v1/code.py
             from fastapi import APIRouter, HTTPException, Depends
             from app.modules.experimental.connection import fetch_data_from_gemini, process_data, send_data_to_front # Assuming this function exists
@@ -172,7 +171,7 @@ Okay, let's refine our user story into a concrete implementation plan, focusing 
                     return formatted_data
                 except Exception as e:
                     raise HTTPException(status_code=500, detail=f"Failed to generate explanation: {str(e)}")
-            ```
+```
         *   Ensure that your database configurations are correct in `app/core/config.py` and `app/core/database.py`
         *   Make sure `get_db` function is imported in `api/v1/code.py`
 
